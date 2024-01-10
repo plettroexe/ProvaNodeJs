@@ -32,7 +32,6 @@ async function salvaInCacheRemota(key, value) {
     .catch((error) => {
       console.error('Errore nella richiesta:', error.message);
     });
-  
 }
 
 // Richiedi all'utente la chiave e il valore
@@ -42,8 +41,6 @@ rl.question('Inserisci la chiave: ', (key) => {
     salvaInCacheRemota(key, value);
     // Chiudi l'interfaccia di input
     rl.close();
-
-    
   });
 });
 
