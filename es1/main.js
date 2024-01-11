@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
-
+const fs= require('fs');
 const readline = require('readline');
 
 const rl = readline.createInterface({
@@ -10,15 +10,17 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-
-function salvaInCacheRemota(key, value) {
+const json = JSON.parse(fs.readFileSync("./conf.json"));
+const token = json.key;
+console.log(json);
+function salvaInCacheRemota(key, value, token) {
   const url = 'https://ws.progettimolinari.it/cache/set';
 
   fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      key: '56ba61b3-a7cf-4a2d-be49-911579750e38'
+      key: token
     },
     body: JSON.stringify({ key: key, value: value })
   })
@@ -37,7 +39,7 @@ function salvaInCacheRemota(key, value) {
 rl.question('Inserisci la chiave: ', (key) => {
   rl.question('Inserisci il valore: ', (value) => {
    
-    salvaInCacheRemota(key, value);
+    salvaInCacheRemota(key, value, token);
    
     rl.close();
   });
