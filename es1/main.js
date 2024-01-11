@@ -10,9 +10,9 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-// Funzione per salvare la chiave e il valore nella cache remota
-async function salvaInCacheRemota(key, value) {
-  const url = 'https://ws.progettimolinari.it/cache/set'; // Sostituisci con l'URL reale del tuo servizio di cache
+
+function salvaInCacheRemota(key, value) {
+  const url = 'https://ws.progettimolinari.it/cache/set';
 
   fetch(url, {
     method: 'POST',
@@ -34,17 +34,15 @@ async function salvaInCacheRemota(key, value) {
     });
 }
 
-// Richiedi all'utente la chiave e il valore
 rl.question('Inserisci la chiave: ', (key) => {
   rl.question('Inserisci il valore: ', (value) => {
-    // Chiama la funzione per salvare nella cache remota
+   
     salvaInCacheRemota(key, value);
-    // Chiudi l'interfaccia di input
+   
     rl.close();
   });
 });
 
-// Gestisci l'evento di chiusura dell'interfaccia di input
 rl.on('close', () => {
   console.log('Grazie per aver inserito la chiave e il valore.');
 });

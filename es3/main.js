@@ -1,7 +1,10 @@
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+
+
 const fs = require('fs');
 const readline = require('readline');
 
-// Funzione per caricare il vocabolario da un file
 function caricaVocabolario(file) {
   try {
     const data = fs.readFileSync(file, 'utf-8');
@@ -12,7 +15,6 @@ function caricaVocabolario(file) {
   }
 }
 
-// Funzione per trovare le rime di una parola nel vocabolario
 function trovaRime(parola, vocabolario) {
     const ultimeTreLettereInserite = parola.slice(-3);
     const rime = vocabolario.filter((parolaVocabolario) =>
@@ -21,9 +23,8 @@ function trovaRime(parola, vocabolario) {
     return rime;
   }
   
-// Funzione principale
 function main() {
-  const vocabolario = caricaVocabolario('./es3/vocabolario.txt');
+  const vocabolario = caricaVocabolario('./vocabolario.txt');
 
   const rl = readline.createInterface({
     input: process.stdin,
@@ -35,6 +36,7 @@ function main() {
 
     if (rime.length > 0) {
       console.log('Rime trovate:', rime.join(', '));
+      console.log("numero di rime trovate: ", rime.length);
     } else {
       console.log('Nessuna rima trovata per la parola inserita.');
     }
@@ -47,5 +49,4 @@ function main() {
   });
 }
 
-// Esegui il programma
 main();
